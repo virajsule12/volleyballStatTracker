@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     FileOutputStream fos = openFileOutput(FILE1, Context.MODE_PRIVATE);
                     fos.write(textToSave.getBytes());
+                    fos.write(",".getBytes());
                     fos.close();
                 } catch (Exception e){
                     textDisplay.setText("file save error");

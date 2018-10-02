@@ -17,7 +17,7 @@ public class Player {
     private int hits;
     private int blocks;
     private int kills;
-    private int bounce;
+    private int tips;
 
     //back-row stats
     private int dig;
@@ -44,7 +44,7 @@ public class Player {
         hits = 0;
         blocks = 0;
         kills = 0;
-        bounce = 0;
+        tips = 0;
 
         dig = 0;
         passes = 0;
