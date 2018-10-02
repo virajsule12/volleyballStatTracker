@@ -40,63 +40,79 @@ public class MainActivity extends AppCompatActivity {
         players.add(new Player("", 5));
         players.add(new Player("", 6));
 
-//        saveText();
-//        loadFile();
+        addHit();
+        saveText();
+        loadFile();
     }
 
-//    public void saveText(){
-//        Button buttonSave = findViewById(R.id.saveScore);
-//
-//        buttonSave.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                TextView textError = findViewById(R.id.textError);
-//
-//
-//                EditText text = findViewById(R.id.textEdit);
-//
+    public void addHit(){
+        Button addHitbtn = (Button) findViewById(R.id.addHits);
+        final TextView textDisplay = findViewById(R.id.displayHit);
+        addHitbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                players.get(1).increaseHit();
+                textDisplay.setText("Hits: " + players.get(1).getHits());
+
+            }
+        });
+    }
+
+
+    public void saveText(){
+        Button buttonSave = findViewById(R.id.saveScore);
+
+        buttonSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView textDisplay = findViewById(R.id.displayHit);
+
+
+                //EditText text = findViewById(R.id.enterScore);
+                String textToSave = textDisplay.getText().toString().substring(6);
+
 //                String textToSave = text.getText().toString();
-//
-//                try {
-//                    FileOutputStream fos = openFileOutput(TEXTFILE, Context.MODE_PRIVATE);
-//                    fos.write(textToSave.getBytes());
-//                    fos.close();
-//                } catch (Exception e){
-//                    textError.setText("file save error");
-//                }
-//
-//            }
-//        });
-//
-//    }
-//
-//    public void loadFile(){
-//        Button loadButton = findViewById(R.id.buttonLoad);
-//        loadButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                TextView textError = findViewById(R.id.textError);
-//                try {
-//                    TextView loadedText = findViewById(R.id.textLoad);
-//                    loadedText.setText("");
-//
-//                    FileInputStream fis = openFileInput(TEXTFILE);
-//
-//                    BufferedReader reader = new BufferedReader(new InputStreamReader(new DataInputStream(fis)));
-//
-//                    String line;
-//
-//                    while ((line = reader.readLine()) != null){
-//                        loadedText.append(line);
-//                        loadedText.append("\n");
-//                    }
-//
-//                    fis.close();
-//                }catch (Exception e){
-//                    textError.setText("file load failed");
-//                }
-//            }
-//        });
-//    }
+
+                try {
+                    FileOutputStream fos = openFileOutput(FILE1, Context.MODE_PRIVATE);
+                    fos.write(textToSave.getBytes());
+                    fos.close();
+                } catch (Exception e){
+                    textDisplay.setText("file save error");
+                }
+
+            }
+        });
+
+    }
+
+    public void loadFile(){
+        Button loadButton = findViewById(R.id.loadScore);
+        loadButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView textError = findViewById(R.id.displayHit);
+                try {
+                    TextView loadedText = findViewById(R.id.displayHit);
+                    loadedText.setText("Hits: ");
+
+                    FileInputStream fis = openFileInput(FILE1);
+
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(new DataInputStream(fis)));
+
+                    String line;
+
+                    while ((line = reader.readLine()) != null){
+                        loadedText.append(line);
+                        loadedText.append("\n");
+                    }
+
+                    fis.close();
+                }catch (Exception e){
+                    textError.setText("file load failed");
+                }
+            }
+        });
+    }
 
 }

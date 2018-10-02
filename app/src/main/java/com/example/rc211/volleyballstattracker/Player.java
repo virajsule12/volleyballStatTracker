@@ -5,12 +5,12 @@ public class Player {
     private String name;
     private int playerType;
     /*numbers corresponding to position
-    1 = right-back
-    2 = right-side
-    3 = middle
-    4 = outside
-    5 = left-back
-    6 = libero/middle back
+    0 = right-back
+    1 = right-side
+    2 = middle
+    3 = outside
+    4 = left-back
+    5 = libero/middle back
      */
 
     //front-row stats
@@ -58,6 +58,14 @@ public class Player {
         serviceErrors = 0;
         miscommunication = 0;
         missedPasses = 0;
+    }
+
+    public void increaseHit(){
+        hits++;
+    }
+
+    public int getHits(){
+        return hits;
     }
 
 }
