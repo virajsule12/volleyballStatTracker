@@ -60,9 +60,9 @@ public class Player {
         missedPasses = 0;
     }
 
-    public void setHits(int numHits){
-        hits = numHits;
-    }
+//    public void setHits(int numHits){
+//        hits = numHits;
+//    }
 
     public void increaseHit(){
         hits++;
@@ -70,6 +70,22 @@ public class Player {
 
     public int getHits(){
         return hits;
+    }
+
+    public void increaseBlock(){
+        blocks++;
+    }
+
+    public int getBlocks(){
+        return blocks;
+    }
+
+    public void increaseKill(){
+        kills++;
+    }
+
+    public int getKills(){
+        return kills;
     }
 
 }
