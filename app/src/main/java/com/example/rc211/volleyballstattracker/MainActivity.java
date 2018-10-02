@@ -47,10 +47,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void addHit(){
         Button addHitbtn = (Button) findViewById(R.id.addHits);
-        final TextView textDisplay = findViewById(R.id.displayHit);
+
         addHitbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                TextView textDisplay = (TextView)findViewById(R.id.displayHit);
+                int hitNum = Integer.parseInt(textDisplay.getText().toString().substring(6));
+//                System.out.println(Integer.parseInt(textDisplay.getText().toString().substring(6)));
+                players.get(1).setHits(hitNum);
                 players.get(1).increaseHit();
                 textDisplay.setText("Hits: " + players.get(1).getHits());
 
@@ -104,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
                     while ((line = reader.readLine()) != null){
                         loadedText.append(line);
-                        loadedText.append("\n");
+                        //loadedText.append("\n");
                     }
 
                     fis.close();
