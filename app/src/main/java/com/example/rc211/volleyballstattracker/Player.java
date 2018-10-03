@@ -32,8 +32,6 @@ public class Player {
 
     //error stats
     private int serviceErrors;
-    private int miscommunication;
-    private int missedPasses;
 
     public Player(String name, int position){
 
@@ -56,8 +54,6 @@ public class Player {
         points = 0;
 
         serviceErrors = 0;
-        miscommunication = 0;
-        missedPasses = 0;
     }
 
 //    public void setHits(int numHits){
@@ -88,4 +84,87 @@ public class Player {
         return kills;
     }
 
+    public void increaseTip(){
+        tips++;
+    }
+
+    public int getTips(){
+        return tips;
+    }
+
+    public void increaseDig(){
+        dig++;
+    }
+
+    public void increasePass(){
+        passes++;
+    }
+
+    public void increaseSets(){
+        sets++;
+    }
+
+    public void increaseAce(){
+        ace++;
+    }
+
+    public void increaseServe(){
+        serves++;
+    }
+
+    public void increaseAssist(){
+        assist++;
+    }
+
+    public void increasePoints(){
+        points++;
+    }
+
+    public void increaseServiceErrors(){
+        serviceErrors++;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPasses() {
+        return passes;
+    }
+
+    public int getPlayerType() {
+        return playerType;
+    }
+
+    public int getDig() {
+        return dig;
+    }
+
+    public int getSets() {
+        return sets;
+    }
+
+    public int getAce() {
+        return ace;
+    }
+
+    public int getServes() {
+        return serves;
+    }
+
+    public int getAssist() {
+        return assist;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public int getServiceErrors() {
+        return serviceErrors;
+    }
+
+    public int getDigs(){
+        return dig;
+    }
 }

@@ -43,20 +43,22 @@ public class NewGameActivity extends AppCompatActivity {
         addHit();
         addBlock();
         addKills();
-
-
+        addTips();
+        addDig();
+        addPasses();
+        addSets();
 
         saveText();
         loadFile();
     }
 
     public void addHit(){
-        Button addHitbtn = (Button) findViewById(R.id.addHits1);
+        Button addbtn = (Button) findViewById(R.id.addHits);
 
-        addHitbtn.setOnClickListener(new View.OnClickListener() {
+        addbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView textDisplay = (TextView)findViewById(R.id.dispHit1);
+                TextView textDisplay = (TextView)findViewById(R.id.dispHit);
 //                int hitNum = Integer.parseInt(textDisplay.getText().toString().substring(6));
 //                System.out.println(Integer.parseInt(textDisplay.getText().toString().substring(6)));
 //                players.get(1).setHits(hitNum);
@@ -68,12 +70,12 @@ public class NewGameActivity extends AppCompatActivity {
     }
 
     public void addBlock(){
-        Button addBlockBtn = (Button) findViewById(R.id.addBlocks1);
+        Button addBtn = (Button) findViewById(R.id.addBlocks);
 
-        addBlockBtn.setOnClickListener(new View.OnClickListener() {
+        addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView textDisplay = (TextView)findViewById(R.id.dispBlock1);
+                TextView textDisplay = (TextView)findViewById(R.id.dispBlock);
 //                int hitNum = Integer.parseInt(textDisplay.getText().toString().substring(6));
 //                System.out.println(Integer.parseInt(textDisplay.getText().toString().substring(6)));
 //                players.get(1).setHits(hitNum);
@@ -85,12 +87,12 @@ public class NewGameActivity extends AppCompatActivity {
     }
 
     public void addKills(){
-        Button addKillBtn = (Button) findViewById(R.id.addKills1);
+        Button addBtn = (Button) findViewById(R.id.addKills);
 
-        addKillBtn.setOnClickListener(new View.OnClickListener() {
+        addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView textDisplay = (TextView)findViewById(R.id.dispKill1);
+                TextView textDisplay = (TextView)findViewById(R.id.dispKill);
 //                int hitNum = Integer.parseInt(textDisplay.getText().toString().substring(6));
 //                System.out.println(Integer.parseInt(textDisplay.getText().toString().substring(6)));
 //                players.get(1).setHits(hitNum);
@@ -101,10 +103,73 @@ public class NewGameActivity extends AppCompatActivity {
         });
     }
 
+    public void addTips(){
+        Button addBtn = (Button) findViewById(R.id.addTips);
 
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView textDisplay = (TextView)findViewById(R.id.dispTips);
+//                int hitNum = Integer.parseInt(textDisplay.getText().toString().substring(6));
+//                System.out.println(Integer.parseInt(textDisplay.getText().toString().substring(6)));
+//                players.get(1).setHits(hitNum);
+                players.get(0).increaseTip();
+                textDisplay.setText("Kills: " + players.get(0).getTips());
 
+            }
+        });
+    }
 
+    public void addDig(){
+        Button addBtn = (Button) findViewById(R.id.addDigs);
 
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView textDisplay = (TextView)findViewById(R.id.dispDigs);
+//                int hitNum = Integer.parseInt(textDisplay.getText().toString().substring(6));
+//                System.out.println(Integer.parseInt(textDisplay.getText().toString().substring(6)));
+//                players.get(1).setHits(hitNum);
+                players.get(0).increaseDig();
+                textDisplay.setText("Kills: " + players.get(0).getDigs());
+
+            }
+        });
+    }
+
+    public void addPasses(){
+        Button addBtn = (Button) findViewById(R.id.addPasses);
+
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView textDisplay = (TextView)findViewById(R.id.dispPasses);
+//                int hitNum = Integer.parseInt(textDisplay.getText().toString().substring(6));
+//                System.out.println(Integer.parseInt(textDisplay.getText().toString().substring(6)));
+//                players.get(1).setHits(hitNum);
+                players.get(0).increasePass();
+                textDisplay.setText("Kills: " + players.get(0).getPasses());
+
+            }
+        });
+    }
+
+    public void addSets(){
+        Button addBtn = (Button) findViewById(R.id.addSets);
+
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView textDisplay = (TextView)findViewById(R.id.dispSets);
+//                int hitNum = Integer.parseInt(textDisplay.getText().toString().substring(6));
+//                System.out.println(Integer.parseInt(textDisplay.getText().toString().substring(6)));
+//                players.get(1).setHits(hitNum);
+                players.get(0).increaseSets();
+                textDisplay.setText("Kills: " + players.get(0).getSets());
+
+            }
+        });
+    }
 
     public void saveText(){
         Button buttonSave = findViewById(R.id.saveScore);
@@ -112,7 +177,7 @@ public class NewGameActivity extends AppCompatActivity {
         buttonSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView textDisplay = findViewById(R.id.dispHit1);
+                TextView textDisplay = findViewById(R.id.dispHit);
 
 
                 //EditText text = findViewById(R.id.enterScore);
@@ -139,9 +204,9 @@ public class NewGameActivity extends AppCompatActivity {
         loadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView textError = findViewById(R.id.dispHit1);
+                TextView textError = findViewById(R.id.dispHit);
                 try {
-                    TextView loadedText = findViewById(R.id.dispHit1);
+                    TextView loadedText = findViewById(R.id.dispHit);
                     loadedText.setText("Hits: ");
 
                     FileInputStream fis = openFileInput(FILE1);
