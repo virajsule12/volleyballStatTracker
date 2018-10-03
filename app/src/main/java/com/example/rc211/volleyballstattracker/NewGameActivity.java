@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -25,7 +26,29 @@ public class NewGameActivity extends AppCompatActivity {
     public static final String FILE5 = "player5Stats.txt";
     public static final String FILE6 = "player6Stats.txt";
 
-    List<Player> players = new ArrayList<>();
+    private List<Player> players = new ArrayList<>();
+
+    private int playerSelected;
+
+    private CheckBox setter;
+    private CheckBox rightside;
+    private CheckBox middle;
+    private CheckBox outside;
+    private CheckBox leftback;
+    private CheckBox libero;
+
+    private TextView dispHitts;
+    private TextView dispBlocks;
+    private TextView dispKills;
+    private TextView dispTips;
+    private TextView dispDigs;
+    private TextView dispPass;
+    private TextView dispSets;
+    private TextView dispAces;
+    private TextView dispServes;
+    private TextView dispAssists;
+    private TextView dispPoints;
+    private TextView dispServiceErrors;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +63,30 @@ public class NewGameActivity extends AppCompatActivity {
         players.add(new Player("", 5));
         players.add(new Player("", 6));
 
+        setter = findViewById(R.id.setter);
+        rightside = findViewById(R.id.rightside);
+        middle = findViewById(R.id.middle);
+        outside = findViewById(R.id.outside);
+        leftback = findViewById(R.id.leftback);
+        libero = findViewById(R.id.libero);
+
+        dispHitts = findViewById(R.id.dispHit);
+        dispBlocks = findViewById(R.id.dispBlock);
+        dispKills = findViewById(R.id.dispKill);
+        dispTips = findViewById(R.id.dispTips);
+        dispDigs = findViewById(R.id.dispDigs);
+        dispPass = findViewById(R.id.dispPasses);
+        dispSets = findViewById(R.id.dispSets);
+        dispAces = findViewById(R.id.dispAces);
+        dispServes = findViewById(R.id.dispServes);
+        dispAssists = findViewById(R.id.dispAssists);
+        dispPoints = findViewById(R.id.dispPoints);
+        dispServiceErrors = findViewById(R.id.dispServiceErrors);
+
+        setter.setChecked(true);
+        playerSelected = 0;
+        selectPlayer();
+
         addHit();
         addBlock();
         addKills();
@@ -47,9 +94,174 @@ public class NewGameActivity extends AppCompatActivity {
         addDig();
         addPasses();
         addSets();
+        addAces();
+        addServes();
+        addAssist();
+        addPoints();
+        addServiceErrors();
 
         saveText();
         loadFile();
+
+    }
+
+    public void selectPlayer(){
+        setter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setter.setChecked(true);
+                rightside.setChecked(false);
+                middle.setChecked(false);
+                outside.setChecked(false);
+                leftback.setChecked(false);
+                libero.setChecked(false);
+
+                playerSelected = 0;
+
+                dispHitts.setText("Hits: " + players.get(playerSelected).getHits());
+                dispBlocks.setText("Blocks: " + players.get(playerSelected).getBlocks());
+                dispKills.setText("Kills: " + players.get(playerSelected).getKills());
+                dispTips.setText("Tips: " + players.get(playerSelected).getTips());
+                dispDigs.setText("Digs: " + players.get(playerSelected).getDigs());
+                dispPass.setText("Passes: " + players.get(playerSelected).getPasses());
+                dispSets.setText("Sets: " + players.get(playerSelected).getSets());
+                dispAces.setText("Aces: " + players.get(playerSelected).getAces());
+                dispServes.setText("Serves: " + players.get(playerSelected).getServes());
+                dispAssists.setText("Assists: " + players.get(playerSelected).getAssists());
+                dispPoints.setText("Points: " + players.get(playerSelected).getPoints());
+                dispServiceErrors.setText("Service Errors: " + players.get(playerSelected).getServiceErrors());
+            }
+        });
+        rightside.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setter.setChecked(false);
+                rightside.setChecked(true);
+                middle.setChecked(false);
+                outside.setChecked(false);
+                leftback.setChecked(false);
+                libero.setChecked(false);
+
+                playerSelected = 1;
+
+                dispHitts.setText("Hits: " + players.get(playerSelected).getHits());
+                dispBlocks.setText("Blocks: " + players.get(playerSelected).getBlocks());
+                dispKills.setText("Kills: " + players.get(playerSelected).getKills());
+                dispTips.setText("Tips: " + players.get(playerSelected).getTips());
+                dispDigs.setText("Digs: " + players.get(playerSelected).getDigs());
+                dispPass.setText("Passes: " + players.get(playerSelected).getPasses());
+                dispSets.setText("Sets: " + players.get(playerSelected).getSets());
+                dispAces.setText("Aces: " + players.get(playerSelected).getAces());
+                dispServes.setText("Serves: " + players.get(playerSelected).getServes());
+                dispAssists.setText("Assists: " + players.get(playerSelected).getAssists());
+                dispPoints.setText("Points: " + players.get(playerSelected).getPoints());
+                dispServiceErrors.setText("Service Errors: " + players.get(playerSelected).getServiceErrors());
+            }
+        });
+        middle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setter.setChecked(false);
+                rightside.setChecked(false);
+                middle.setChecked(true);
+                outside.setChecked(false);
+                leftback.setChecked(false);
+                libero.setChecked(false);
+
+                playerSelected = 2;
+
+                dispHitts.setText("Hits: " + players.get(playerSelected).getHits());
+                dispBlocks.setText("Blocks: " + players.get(playerSelected).getBlocks());
+                dispKills.setText("Kills: " + players.get(playerSelected).getKills());
+                dispTips.setText("Tips: " + players.get(playerSelected).getTips());
+                dispDigs.setText("Digs: " + players.get(playerSelected).getDigs());
+                dispPass.setText("Passes: " + players.get(playerSelected).getPasses());
+                dispSets.setText("Sets: " + players.get(playerSelected).getSets());
+                dispAces.setText("Aces: " + players.get(playerSelected).getAces());
+                dispServes.setText("Serves: " + players.get(playerSelected).getServes());
+                dispAssists.setText("Assists: " + players.get(playerSelected).getAssists());
+                dispPoints.setText("Points: " + players.get(playerSelected).getPoints());
+                dispServiceErrors.setText("Service Errors: " + players.get(playerSelected).getServiceErrors());
+            }
+        });
+        outside.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setter.setChecked(false);
+                rightside.setChecked(false);
+                middle.setChecked(false);
+                outside.setChecked(true);
+                leftback.setChecked(false);
+                libero.setChecked(false);
+
+                playerSelected = 3;
+
+                dispHitts.setText("Hits: " + players.get(playerSelected).getHits());
+                dispBlocks.setText("Blocks: " + players.get(playerSelected).getBlocks());
+                dispKills.setText("Kills: " + players.get(playerSelected).getKills());
+                dispTips.setText("Tips: " + players.get(playerSelected).getTips());
+                dispDigs.setText("Digs: " + players.get(playerSelected).getDigs());
+                dispPass.setText("Passes: " + players.get(playerSelected).getPasses());
+                dispSets.setText("Sets: " + players.get(playerSelected).getSets());
+                dispAces.setText("Aces: " + players.get(playerSelected).getAces());
+                dispServes.setText("Serves: " + players.get(playerSelected).getServes());
+                dispAssists.setText("Assists: " + players.get(playerSelected).getAssists());
+                dispPoints.setText("Points: " + players.get(playerSelected).getPoints());
+                dispServiceErrors.setText("Service Errors: " + players.get(playerSelected).getServiceErrors());
+            }
+        });
+        leftback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setter.setChecked(false);
+                rightside.setChecked(false);
+                middle.setChecked(false);
+                outside.setChecked(false);
+                leftback.setChecked(true);
+                libero.setChecked(false);
+
+                playerSelected = 4;
+
+                dispHitts.setText("Hits: " + players.get(playerSelected).getHits());
+                dispBlocks.setText("Blocks: " + players.get(playerSelected).getBlocks());
+                dispKills.setText("Kills: " + players.get(playerSelected).getKills());
+                dispTips.setText("Tips: " + players.get(playerSelected).getTips());
+                dispDigs.setText("Digs: " + players.get(playerSelected).getDigs());
+                dispPass.setText("Passes: " + players.get(playerSelected).getPasses());
+                dispSets.setText("Sets: " + players.get(playerSelected).getSets());
+                dispAces.setText("Aces: " + players.get(playerSelected).getAces());
+                dispServes.setText("Serves: " + players.get(playerSelected).getServes());
+                dispAssists.setText("Assists: " + players.get(playerSelected).getAssists());
+                dispPoints.setText("Points: " + players.get(playerSelected).getPoints());
+                dispServiceErrors.setText("Service Errors: " + players.get(playerSelected).getServiceErrors());
+            }
+        });
+        libero.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setter.setChecked(false);
+                rightside.setChecked(false);
+                middle.setChecked(false);
+                outside.setChecked(false);
+                leftback.setChecked(false);
+                libero.setChecked(true);
+
+                playerSelected = 5;
+
+                dispHitts.setText("Hits: " + players.get(playerSelected).getHits());
+                dispBlocks.setText("Blocks: " + players.get(playerSelected).getBlocks());
+                dispKills.setText("Kills: " + players.get(playerSelected).getKills());
+                dispTips.setText("Tips: " + players.get(playerSelected).getTips());
+                dispDigs.setText("Digs: " + players.get(playerSelected).getDigs());
+                dispPass.setText("Passes: " + players.get(playerSelected).getPasses());
+                dispSets.setText("Sets: " + players.get(playerSelected).getSets());
+                dispAces.setText("Aces: " + players.get(playerSelected).getAces());
+                dispServes.setText("Serves: " + players.get(playerSelected).getServes());
+                dispAssists.setText("Assists: " + players.get(playerSelected).getAssists());
+                dispPoints.setText("Points: " + players.get(playerSelected).getPoints());
+                dispServiceErrors.setText("Service Errors: " + players.get(playerSelected).getServiceErrors());
+            }
+        });
     }
 
     public void addHit(){
@@ -59,11 +271,8 @@ public class NewGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 TextView textDisplay = (TextView)findViewById(R.id.dispHit);
-//                int hitNum = Integer.parseInt(textDisplay.getText().toString().substring(6));
-//                System.out.println(Integer.parseInt(textDisplay.getText().toString().substring(6)));
-//                players.get(1).setHits(hitNum);
-                players.get(0).increaseHit();
-                textDisplay.setText("Hits: " + players.get(0).getHits());
+                players.get(playerSelected).increaseHit();
+                textDisplay.setText("Hits: " + players.get(playerSelected).getHits());
 
             }
         });
@@ -76,11 +285,9 @@ public class NewGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 TextView textDisplay = (TextView)findViewById(R.id.dispBlock);
-//                int hitNum = Integer.parseInt(textDisplay.getText().toString().substring(6));
-//                System.out.println(Integer.parseInt(textDisplay.getText().toString().substring(6)));
-//                players.get(1).setHits(hitNum);
-                players.get(0).increaseBlock();
-                textDisplay.setText("Blocks: " + players.get(0).getBlocks());
+
+                players.get(playerSelected).increaseBlock();
+                textDisplay.setText("Blocks: " + players.get(playerSelected).getBlocks());
 
             }
         });
@@ -93,11 +300,8 @@ public class NewGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 TextView textDisplay = (TextView)findViewById(R.id.dispKill);
-//                int hitNum = Integer.parseInt(textDisplay.getText().toString().substring(6));
-//                System.out.println(Integer.parseInt(textDisplay.getText().toString().substring(6)));
-//                players.get(1).setHits(hitNum);
-                players.get(0).increaseKill();
-                textDisplay.setText("Kills: " + players.get(0).getKills());
+                players.get(playerSelected).increaseKill();
+                textDisplay.setText("Kills: " + players.get(playerSelected).getKills());
 
             }
         });
@@ -113,8 +317,8 @@ public class NewGameActivity extends AppCompatActivity {
 //                int hitNum = Integer.parseInt(textDisplay.getText().toString().substring(6));
 //                System.out.println(Integer.parseInt(textDisplay.getText().toString().substring(6)));
 //                players.get(1).setHits(hitNum);
-                players.get(0).increaseTip();
-                textDisplay.setText("Kills: " + players.get(0).getTips());
+                players.get(playerSelected).increaseTip();
+                textDisplay.setText("Tips: " + players.get(playerSelected).getTips());
 
             }
         });
@@ -127,11 +331,8 @@ public class NewGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 TextView textDisplay = (TextView)findViewById(R.id.dispDigs);
-//                int hitNum = Integer.parseInt(textDisplay.getText().toString().substring(6));
-//                System.out.println(Integer.parseInt(textDisplay.getText().toString().substring(6)));
-//                players.get(1).setHits(hitNum);
-                players.get(0).increaseDig();
-                textDisplay.setText("Kills: " + players.get(0).getDigs());
+                players.get(playerSelected).increaseDig();
+                textDisplay.setText("Digs: " + players.get(playerSelected).getDigs());
 
             }
         });
@@ -144,12 +345,8 @@ public class NewGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 TextView textDisplay = (TextView)findViewById(R.id.dispPasses);
-//                int hitNum = Integer.parseInt(textDisplay.getText().toString().substring(6));
-//                System.out.println(Integer.parseInt(textDisplay.getText().toString().substring(6)));
-//                players.get(1).setHits(hitNum);
-                players.get(0).increasePass();
-                textDisplay.setText("Kills: " + players.get(0).getPasses());
-
+                players.get(playerSelected).increasePass();
+                textDisplay.setText("Passes: " + players.get(playerSelected).getPasses());
             }
         });
     }
@@ -161,11 +358,78 @@ public class NewGameActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 TextView textDisplay = (TextView)findViewById(R.id.dispSets);
-//                int hitNum = Integer.parseInt(textDisplay.getText().toString().substring(6));
-//                System.out.println(Integer.parseInt(textDisplay.getText().toString().substring(6)));
-//                players.get(1).setHits(hitNum);
-                players.get(0).increaseSets();
-                textDisplay.setText("Kills: " + players.get(0).getSets());
+                players.get(playerSelected).increaseSets();
+                textDisplay.setText("Sets: " + players.get(playerSelected).getSets());
+
+            }
+        });
+    }
+
+    public void addAces(){
+        Button addBtn = (Button) findViewById(R.id.addAces);
+
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView textDisplay = (TextView)findViewById(R.id.dispAces);
+                players.get(playerSelected).increaseAce();
+                textDisplay.setText("Aces: " + players.get(playerSelected).getAces());
+
+            }
+        });
+    }
+
+    public void addServes(){
+        Button addBtn = (Button) findViewById(R.id.addServes);
+
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView textDisplay = (TextView)findViewById(R.id.dispServes);
+                players.get(playerSelected).increaseServe();
+                textDisplay.setText("Serves: " + players.get(playerSelected).getServes());
+
+            }
+        });
+    }
+
+    public void addAssist(){
+        Button addBtn = (Button) findViewById(R.id.addAssists);
+
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView textDisplay = (TextView)findViewById(R.id.dispAssists);
+                players.get(playerSelected).increaseAssist();
+                textDisplay.setText("Assists: " + players.get(playerSelected).getAssists());
+
+            }
+        });
+    }
+
+    public void addPoints(){
+        Button addBtn = (Button) findViewById(R.id.addPoints);
+
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView textDisplay = (TextView)findViewById(R.id.dispPoints);
+                players.get(playerSelected).increasePoints();
+                textDisplay.setText("Points: " + players.get(playerSelected).getPoints());
+
+            }
+        });
+    }
+
+    public void addServiceErrors(){
+        Button addBtn = (Button) findViewById(R.id.addServiceErrors);
+
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView textDisplay = (TextView)findViewById(R.id.dispServiceErrors);
+                players.get(playerSelected).increaseServiceErrors();
+                textDisplay.setText("Service Errors: " + players.get(playerSelected).getServiceErrors());
 
             }
         });

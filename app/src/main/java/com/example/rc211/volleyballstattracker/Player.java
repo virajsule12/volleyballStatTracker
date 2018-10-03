@@ -20,14 +20,14 @@ public class Player {
     private int tips;
 
     //back-row stats
-    private int dig;
+    private int digs;
     private int passes;
     private int sets;
 
     //all-positions stats
-    private int ace;
+    private int aces;
     private int serves;
-    private int assist;
+    private int assists;
     private int points;
 
     //error stats
@@ -44,21 +44,17 @@ public class Player {
         kills = 0;
         tips = 0;
 
-        dig = 0;
+        digs = 0;
         passes = 0;
         sets = 0;
 
-        ace = 0;
+        aces = 0;
         serves = 0;
-        assist = 0;
+        assists = 0;
         points = 0;
 
         serviceErrors = 0;
     }
-
-//    public void setHits(int numHits){
-//        hits = numHits;
-//    }
 
     public void increaseHit(){
         hits++;
@@ -93,7 +89,7 @@ public class Player {
     }
 
     public void increaseDig(){
-        dig++;
+        digs++;
     }
 
     public void increasePass(){
@@ -105,7 +101,7 @@ public class Player {
     }
 
     public void increaseAce(){
-        ace++;
+        aces++;
     }
 
     public void increaseServe(){
@@ -113,7 +109,7 @@ public class Player {
     }
 
     public void increaseAssist(){
-        assist++;
+        assists++;
     }
 
     public void increasePoints(){
@@ -136,24 +132,24 @@ public class Player {
         return playerType;
     }
 
-    public int getDig() {
-        return dig;
+    public int getDigs() {
+        return digs;
     }
 
     public int getSets() {
         return sets;
     }
 
-    public int getAce() {
-        return ace;
+    public int getAces() {
+        return aces;
     }
 
     public int getServes() {
         return serves;
     }
 
-    public int getAssist() {
-        return assist;
+    public int getAssists() {
+        return assists;
     }
 
     public int getPoints() {
@@ -164,7 +160,4 @@ public class Player {
         return serviceErrors;
     }
 
-    public int getDigs(){
-        return dig;
-    }
 }
