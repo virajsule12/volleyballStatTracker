@@ -25,10 +25,14 @@ import static com.example.rc211.volleyballstattracker.NewGameActivity.FILE1;
 
 public class MainActivity extends AppCompatActivity {
 
+    private List<Storage> files = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        initializeFiles();
 
         startNewGame();
         loadGraph();
@@ -51,6 +55,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void initializeFiles(){
+        files.add(new Storage());
+        files.add(new Storage());
+        files.add(new Storage());
+        files.add(new Storage());
+        files.add(new Storage());
+        files.add(new Storage());
+
+        String text = files.get(0).loadFile(0);
+        TextView textView = findViewById(R.id.dispStats);
+        textView.setText(text);
+
+    }
 
     public void startNewGame(){
         Button startNewGame = findViewById(R.id.newGame);
