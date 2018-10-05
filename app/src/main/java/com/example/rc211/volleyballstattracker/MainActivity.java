@@ -13,6 +13,8 @@ import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
+import org.w3c.dom.Text;
+
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
@@ -25,14 +27,29 @@ import static com.example.rc211.volleyballstattracker.NewGameActivity.FILE1;
 
 public class MainActivity extends AppCompatActivity {
 
-    private List<Storage> files = new ArrayList<>();
+    public static final String FILE1 = "player1Stats.txt";
+    public static final String FILE2 = "player2Stats.txt";
+    public static final String FILE3 = "player3Stats.txt";
+    public static final String FILE4 = "player4Stats.txt";
+    public static final String FILE5 = "player5Stats.txt";
+    public static final String FILE6 = "player6Stats.txt";
+    public static final String TESTFILE1 = "testfile1.txt";
+
+    private List<Storage> stats = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        initializeFiles();
+        stats.add(new Storage());
+        stats.add(new Storage());
+        stats.add(new Storage());
+        stats.add(new Storage());
+        stats.add(new Storage());
+        stats.add(new Storage());
+
+        initializeStats();
 
         startNewGame();
         loadGraph();
@@ -55,17 +72,112 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void initializeFiles(){
-        files.add(new Storage());
-        files.add(new Storage());
-        files.add(new Storage());
-        files.add(new Storage());
-        files.add(new Storage());
-        files.add(new Storage());
 
-        String text = files.get(0).loadFile(0);
-        TextView textView = findViewById(R.id.dispStats);
-        textView.setText(text);
+
+
+
+//    public void saveText(){
+//        //EditText text = findViewById(R.id.enterScore);
+//        String textToSave = "hello world TEST";
+//
+////                String textToSave = text.getText().toString();
+//
+//        try {
+//            FileOutputStream fos = openFileOutput(FILE, Context.MODE_PRIVATE);
+//            fos.write(textToSave.getBytes());
+//            fos.write("\n".getBytes());
+////                    fos.write(",".getBytes());
+//            fos.close();
+//        } catch (Exception e){
+//            System.out.println("file save error");
+//        }
+//    }
+//
+//    public String loadFile(int stat){
+//        try {
+//
+//            String loadedStats = "";
+//
+//            FileInputStream fis = openFileInput(FILE);
+//
+//            BufferedReader reader = new BufferedReader(new InputStreamReader(new DataInputStream(fis)));
+//
+//            String line;
+//
+//            while ((line = reader.readLine()) != null){
+////                loadedStats.append(line);
+//                loadedStats = loadedStats + line;
+//                //loadedText.append("\n");
+//            }
+//
+//            fis.close();
+//
+//            return loadedStats;
+//        }catch (Exception e){
+//            return ("File load error");
+//        }
+//    }
+
+
+
+
+
+    public void initializeStats(){
+        for (int i = 0;i < 12;i++){
+            String textToSave = "hello world TEST!\n1\n2\n3\n4\n5\n6\n7\n8\n9\n9\n8";
+
+//                String textToSave = text.getText().toString();
+
+            try {
+                FileOutputStream fos = openFileOutput(TESTFILE1, Context.MODE_PRIVATE);
+                fos.write(textToSave.getBytes());
+                //fos.write("\n".getBytes());
+//                    fos.write(",".getBytes());
+                fos.close();
+            } catch (Exception e){
+                EditText text = findViewById(R.id.dispStats2);
+                text.setText("file save unsuccesfull");
+            }
+        }
+
+
+
+        try {
+
+            String loadedStats = "";
+
+            FileInputStream fis = openFileInput(TESTFILE1);
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(new DataInputStream(fis)));
+
+            String line = "";
+            line = reader.readLine();
+
+            EditText text1 = findViewById(R.id.dispStats);
+
+            text1.setText(line);
+            String newText = "";
+
+            for (int i = 0;i < 12;i++){
+                while ((line = reader.readLine()) != null){
+                    newText = newText + line;
+                    text1.setText(newText);
+                    stats.get(0).addStats(line);
+                }
+            }
+
+//            text.setText(loadedStats);
+            fis.close();
+
+        }catch (Exception e){
+            EditText textError = findViewById(R.id.dispStats);
+            textError.setText("FILE LOAD ERROR!");
+        }
+
+        EditText text = findViewById(R.id.dispStats);
+        for (int i = 0;i < 12;i++){
+            text.append(stats.get(0).getStats(0)+"");
+        }
 
     }
 

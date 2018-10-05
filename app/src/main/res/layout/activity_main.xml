@@ -6,6 +6,24 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <EditText
+        android:id="@+id/dispStats2"
+        android:layout_width="311dp"
+        android:layout_height="93dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:text="Name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.806" />
+
     <Button
         android:id="@+id/newGame"
         android:layout_width="wrap_content"
@@ -48,20 +66,21 @@
         app:layout_constraintHorizontal_bias="0.386"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
+    <EditText
         android:id="@+id/dispStats"
-        android:layout_width="322dp"
-        android:layout_height="184dp"
-        android:layout_marginBottom="8dp"
+        android:layout_width="311dp"
+        android:layout_height="93dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="TextView"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:text="Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.723" />
+        app:layout_constraintVertical_bias="0.552" />
+
 </android.support.constraint.ConstraintLayout>

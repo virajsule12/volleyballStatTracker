@@ -1,69 +1,35 @@
 package com.example.rc211.volleyballstattracker;
 
-import android.content.Context;
-import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import java.util.ArrayList;
+import java.util.List;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStreamReader;
+public class Storage {
 
-public class Storage extends AppCompatActivity {
-    private static final String FILE = "playerStats.txt";
+    private List<String> stats = new ArrayList<>();
+
+//    private String hits;
+//    private String blocks;
+//    private String kills;
+//    private String tips;
+//    private String digs;
+//    private String passes;
+//    private String sets;
+//    private String aces;
+//    private String serves;
+//    private String assists;
+//    private String points;
+//    private String serviceErrors;
 
     public Storage(){
-        saveText();
+        addStats("hello5");
     }
 
-    public void saveText(){
-
-
-
-                //EditText text = findViewById(R.id.enterScore);
-                String textToSave = "hello world TEST";
-
-//                String textToSave = text.getText().toString();
-
-                try {
-                    FileOutputStream fos = openFileOutput(FILE, Context.MODE_PRIVATE);
-                    fos.write(textToSave.getBytes());
-                    fos.write("\n".getBytes());
-//                    fos.write(",".getBytes());
-                    fos.close();
-                } catch (Exception e){
-                    System.out.println("file save error");
-                }
-
-
-
+    public void addStats(String statistics){
+        stats.add(statistics);
     }
 
-    public String loadFile(int stat){
-        try {
-
-            String loadedStats = "";
-
-            FileInputStream fis = openFileInput(FILE);
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(new DataInputStream(fis)));
-
-            String line;
-
-            while ((line = reader.readLine()) != null){
-//                loadedStats.append(line);
-                loadedStats = loadedStats + line;
-                //loadedText.append("\n");
-            }
-
-            fis.close();
-
-            return loadedStats;
-        }catch (Exception e){
-            return ("File load error");
-        }
+    public int getStats(int i){
+//        return stats.get(i);
+        return stats.size();
     }
 }
