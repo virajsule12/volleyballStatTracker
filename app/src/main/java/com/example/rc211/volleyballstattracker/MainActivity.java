@@ -123,22 +123,36 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void initializeStats(){
-        for (int i = 0;i < 12;i++){
-            String textToSave = "hello world TEST!\n1\n2\n3\n4\n5\n6\n7\n8\n9\n9\n8";
+//        for (int i = 0;i < 12;i++){
+            String textToSave = "0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11";
 
 //                String textToSave = text.getText().toString();
 
             try {
                 FileOutputStream fos = openFileOutput(TESTFILE1, Context.MODE_PRIVATE);
-                fos.write(textToSave.getBytes());
-                //fos.write("\n".getBytes());
+//                fos.write(textToSave.getBytes());
+//                for (int i=0;i<12;i++){
+//                    fos.write(textToSave.substring(i,i+1).getBytes());
+//                    fos.write("\n".getBytes());
+//                }
+//                fos.write("\n".getBytes());
+//                fos.write("\n".getBytes());
+//                fos.write("\n".getBytes());
+
+//                fos.write("\n".getBytes());
+                fos.write("\n0\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11".getBytes());
+//                fos.write("\n".getBytes());
+//                fos.write("1".getBytes());
+//                fos.write("\n".getBytes());
+
+//                //fos.write("\n".getBytes());
 //                    fos.write(",".getBytes());
                 fos.close();
             } catch (Exception e){
                 EditText text = findViewById(R.id.dispStats2);
                 text.setText("file save unsuccesfull");
             }
-        }
+//        }
 
 
 
@@ -153,20 +167,22 @@ public class MainActivity extends AppCompatActivity {
             String line = "";
             line = reader.readLine();
 
-            EditText text1 = findViewById(R.id.dispStats);
+            EditText text = findViewById(R.id.dispStats2);
 
-            text1.setText(line);
+//            text1.setText(line);
             String newText = "";
 
-            for (int i = 0;i < 12;i++){
+//            for (int i = 0;i < 12;i++){
                 while ((line = reader.readLine()) != null){
-                    newText = newText + line;
-                    text1.setText(newText);
-                    stats.get(0).addStats(line);
-                }
-            }
+//                    newText = newText + line;
+//                    text.append("\n"+line);
 
-//            text.setText(loadedStats);
+                    stats.get(0).addStats(line);
+//                    text.append("line " + line);
+                }
+//            }
+
+//            text.setText(newText);
             fis.close();
 
         }catch (Exception e){
@@ -174,10 +190,11 @@ public class MainActivity extends AppCompatActivity {
             textError.setText("FILE LOAD ERROR!");
         }
 
-        EditText text = findViewById(R.id.dispStats);
+        EditText text = findViewById(R.id.dispStats2);
         for (int i = 0;i < 12;i++){
-            text.append(stats.get(0).getStats(0)+"");
+            text.append("yo: "+stats.get(0).getStats(i)+ "\n");
         }
+
 
     }
 

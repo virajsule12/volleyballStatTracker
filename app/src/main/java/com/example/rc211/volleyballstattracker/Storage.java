@@ -21,15 +21,14 @@ public class Storage {
 //    private String serviceErrors;
 
     public Storage(){
-        addStats("hello5");
+
     }
 
     public void addStats(String statistics){
         stats.add(statistics);
     }
 
-    public int getStats(int i){
-//        return stats.get(i);
-        return stats.size();
+    public String getStats(int i){
+        return stats.get(i);
     }
 }
