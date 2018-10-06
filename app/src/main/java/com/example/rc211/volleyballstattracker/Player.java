@@ -56,6 +56,11 @@ public class Player {
         serviceErrors = 0;
     }
 
+    /*
+    * a series of accessor methods which return the value of instance fields
+    * a series of methods that increment the value of instance fields
+    */
+
     public void increaseHit(){
         hits++;
     }
@@ -158,6 +163,26 @@ public class Player {
 
     public int getServiceErrors() {
         return serviceErrors;
+    }
+
+
+    public String formatToSave(){//formats strings in such a way that the data can be easily read the next time a text file is loaded
+        String formattedStats = "";
+
+        formattedStats = formattedStats + hits + ",";
+        formattedStats = formattedStats + blocks + ",";
+        formattedStats = formattedStats + kills + ",";
+        formattedStats = formattedStats + tips + ",";
+        formattedStats = formattedStats + digs + ",";
+        formattedStats = formattedStats + passes + ",";
+        formattedStats = formattedStats + sets + ",";
+        formattedStats = formattedStats + aces + ",";
+        formattedStats = formattedStats + serves + ",";
+        formattedStats = formattedStats + assists + ",";
+        formattedStats = formattedStats + points + ",";
+        formattedStats = formattedStats + serviceErrors + ",";
+
+        return formattedStats;
     }
 
 }

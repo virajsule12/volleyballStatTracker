@@ -1,6 +1,7 @@
 package com.example.rc211.volleyballstattracker;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,13 +19,13 @@ import java.util.List;
 
 public class NewGameActivity extends AppCompatActivity {
 
-    //text files for saving stats
-    public static final String FILE1 = "player1Stats.txt";
-    public static final String FILE2 = "player2Stats.txt";
-    public static final String FILE3 = "player3Stats.txt";
-    public static final String FILE4 = "player4Stats.txt";
-    public static final String FILE5 = "player5Stats.txt";
-    public static final String FILE6 = "player6Stats.txt";
+//    //text files for saving stats
+//    public static final String FILE1 = "player1Stats.txt";
+//    public static final String FILE2 = "player2Stats.txt";
+//    public static final String FILE3 = "player3Stats.txt";
+//    public static final String FILE4 = "player4Stats.txt";
+//    public static final String FILE5 = "player5Stats.txt";
+//    public static final String FILE6 = "player6Stats.txt";
 
     private List<Player> players = new ArrayList<>();
 
@@ -51,7 +52,7 @@ public class NewGameActivity extends AppCompatActivity {
     private TextView dispServiceErrors;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {//initializes object arrays and Views; calls any necessary methods so that the activity can start correctly
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_game);
 
@@ -100,12 +101,14 @@ public class NewGameActivity extends AppCompatActivity {
         addPoints();
         addServiceErrors();
 
-        saveText();
-        loadFile();
+//        saveText();
+//        loadFile();
 
+
+        saveAndExit();
     }
 
-    public void selectPlayer(){
+    public void selectPlayer(){//method which updates the on-screen values of NewGameActivity stats; checks the selected check box, and unchecks the other check boxes
         setter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -264,7 +267,7 @@ public class NewGameActivity extends AppCompatActivity {
         });
     }
 
-    public void addHit(){
+    public void addHit(){//increments number of hits in players object array and displays the updated value
         Button addbtn = (Button) findViewById(R.id.addHits);
 
         addbtn.setOnClickListener(new View.OnClickListener() {
@@ -278,7 +281,7 @@ public class NewGameActivity extends AppCompatActivity {
         });
     }
 
-    public void addBlock(){
+    public void addBlock(){//increments number of blocks in players object array and displays the updated value
         Button addBtn = (Button) findViewById(R.id.addBlocks);
 
         addBtn.setOnClickListener(new View.OnClickListener() {
@@ -293,7 +296,7 @@ public class NewGameActivity extends AppCompatActivity {
         });
     }
 
-    public void addKills(){
+    public void addKills(){//increments number of kills in players object array and displays the updated value
         Button addBtn = (Button) findViewById(R.id.addKills);
 
         addBtn.setOnClickListener(new View.OnClickListener() {
@@ -307,7 +310,7 @@ public class NewGameActivity extends AppCompatActivity {
         });
     }
 
-    public void addTips(){
+    public void addTips(){//increments number of tips in players object array and displays the updated value
         Button addBtn = (Button) findViewById(R.id.addTips);
 
         addBtn.setOnClickListener(new View.OnClickListener() {
@@ -324,7 +327,7 @@ public class NewGameActivity extends AppCompatActivity {
         });
     }
 
-    public void addDig(){
+    public void addDig(){//increments number of digs in players object array and displays the updated value
         Button addBtn = (Button) findViewById(R.id.addDigs);
 
         addBtn.setOnClickListener(new View.OnClickListener() {
@@ -338,7 +341,7 @@ public class NewGameActivity extends AppCompatActivity {
         });
     }
 
-    public void addPasses(){
+    public void addPasses(){//increments number of passes in players object array and displays the updated value
         Button addBtn = (Button) findViewById(R.id.addPasses);
 
         addBtn.setOnClickListener(new View.OnClickListener() {
@@ -351,7 +354,7 @@ public class NewGameActivity extends AppCompatActivity {
         });
     }
 
-    public void addSets(){
+    public void addSets(){//increments number of sets in players object array and displays the updated value
         Button addBtn = (Button) findViewById(R.id.addSets);
 
         addBtn.setOnClickListener(new View.OnClickListener() {
@@ -365,7 +368,7 @@ public class NewGameActivity extends AppCompatActivity {
         });
     }
 
-    public void addAces(){
+    public void addAces(){//increments number of aces in players object array and displays the updated value
         Button addBtn = (Button) findViewById(R.id.addAces);
 
         addBtn.setOnClickListener(new View.OnClickListener() {
@@ -379,7 +382,7 @@ public class NewGameActivity extends AppCompatActivity {
         });
     }
 
-    public void addServes(){
+    public void addServes(){//increments number of serves in players object array and displays the updated value
         Button addBtn = (Button) findViewById(R.id.addServes);
 
         addBtn.setOnClickListener(new View.OnClickListener() {
@@ -393,7 +396,7 @@ public class NewGameActivity extends AppCompatActivity {
         });
     }
 
-    public void addAssist(){
+    public void addAssist(){//increments number of assists in players object array and displays the updated value
         Button addBtn = (Button) findViewById(R.id.addAssists);
 
         addBtn.setOnClickListener(new View.OnClickListener() {
@@ -407,7 +410,7 @@ public class NewGameActivity extends AppCompatActivity {
         });
     }
 
-    public void addPoints(){
+    public void addPoints(){//increments number of points in players object array and displays the updated value
         Button addBtn = (Button) findViewById(R.id.addPoints);
 
         addBtn.setOnClickListener(new View.OnClickListener() {
@@ -421,7 +424,7 @@ public class NewGameActivity extends AppCompatActivity {
         });
     }
 
-    public void addServiceErrors(){
+    public void addServiceErrors(){//increments number of service errors in players object array and displays the updated value
         Button addBtn = (Button) findViewById(R.id.addServiceErrors);
 
         addBtn.setOnClickListener(new View.OnClickListener() {
@@ -435,62 +438,95 @@ public class NewGameActivity extends AppCompatActivity {
         });
     }
 
-    public void saveText(){
-        Button buttonSave = findViewById(R.id.saveScore);
-
-        buttonSave.setOnClickListener(new View.OnClickListener() {
+    public void saveAndExit(){//sends data back to MainActivity and finishes/closes NewGameActivity
+        Button save = findViewById(R.id.saveScore);
+        save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView textDisplay = findViewById(R.id.dispHit);
-
-
-                //EditText text = findViewById(R.id.enterScore);
-                String textToSave = textDisplay.getText().toString().substring(6);
-
-//                String textToSave = text.getText().toString();
-
-                try {
-                    FileOutputStream fos = openFileOutput(FILE1, Context.MODE_PRIVATE);
-                    fos.write(textToSave.getBytes());
-                    fos.write("\n".getBytes());
-//                    fos.write(",".getBytes());
-                    fos.close();
-                } catch (Exception e){
-                    textDisplay.setText("file save error");
-                }
-
-            }
-        });
-
-    }
-
-    public void loadFile(){
-        Button loadButton = findViewById(R.id.loadScore);
-        loadButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TextView textError = findViewById(R.id.dispHit);
-                try {
-                    TextView loadedText = findViewById(R.id.dispHit);
-                    loadedText.setText("Hits: ");
-
-                    FileInputStream fis = openFileInput(FILE1);
-
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(new DataInputStream(fis)));
-
-                    String line;
-
-                    while ((line = reader.readLine()) != null){
-                        loadedText.append(line);
-                        //loadedText.append("\n");
-                    }
-
-                    fis.close();
-                }catch (Exception e){
-                    textError.setText("file load failed");
-                }
+                Intent intent = new Intent();
+                intent.putExtra("stats1", formatStats(0));
+                intent.putExtra("stats2", formatStats(1));
+                intent.putExtra("stats3", formatStats(2));
+                intent.putExtra("stats4", formatStats(3));
+                intent.putExtra("stats5", formatStats(4));
+                intent.putExtra("stats6", formatStats(5));
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
     }
+
+    public String formatStats(int i){//calls a method in Player class which formats data into an easily readable string
+        return players.get(i).formatToSave();
+    }
+
+//    public String formatStats(){
+//        return players.get(0).formatToSave() + "-"
+//                + players.get(1).formatToSave() + "-"
+//                + players.get(2).formatToSave() + "-"
+//                + players.get(3).formatToSave() + "-"
+//                + players.get(4).formatToSave() + "-"
+//                + players.get(5).formatToSave();
+//    }
+
+
+
+//    public void saveText(){
+//        Button buttonSave = findViewById(R.id.saveScore);
+//
+//        buttonSave.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                TextView textDisplay = findViewById(R.id.dispHit);
+//
+//
+//                //EditText text = findViewById(R.id.enterScore);
+//                String textToSave = textDisplay.getText().toString().substring(6);
+//
+////                String textToSave = text.getText().toString();
+//
+//                try {
+//                    FileOutputStream fos = openFileOutput(FILE1, Context.MODE_PRIVATE);
+//                    fos.write(textToSave.getBytes());
+//                    fos.write("\n".getBytes());
+////                    fos.write(",".getBytes());
+//                    fos.close();
+//                } catch (Exception e){
+//                    textDisplay.setText("file save error");
+//                }
+//
+//            }
+//        });
+//
+//    }
+//
+//    public void loadFile(){
+//        Button loadButton = findViewById(R.id.loadScore);
+//        loadButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                TextView textError = findViewById(R.id.dispHit);
+//                try {
+//                    TextView loadedText = findViewById(R.id.dispHit);
+//                    loadedText.setText("Hits: ");
+//
+//                    FileInputStream fis = openFileInput(FILE1);
+//
+//                    BufferedReader reader = new BufferedReader(new InputStreamReader(new DataInputStream(fis)));
+//
+//                    String line;
+//
+//                    while ((line = reader.readLine()) != null){
+//                        loadedText.append(line);
+//                        //loadedText.append("\n");
+//                    }
+//
+//                    fis.close();
+//                }catch (Exception e){
+//                    textError.setText("file load failed");
+//                }
+//            }
+//        });
+//    }
 
 }
