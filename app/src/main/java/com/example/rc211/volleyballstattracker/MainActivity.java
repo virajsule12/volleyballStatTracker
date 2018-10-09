@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
 
     private List<Storage> stats = new ArrayList<>();//object array that saves stats from text files; new data is added each object and then saved into a text file
 
+    private boolean filesDisplayed = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {//initializes stats object array; calls any necessary methods so that the app can start correctly
         super.onCreate(savedInstanceState);
@@ -64,6 +66,8 @@ public class MainActivity extends AppCompatActivity {
         loadHitsGraph();
 
         loadBlocksGraph();
+
+        displayFiles();
 
 
 //        loadGraph();
@@ -297,7 +301,7 @@ public class MainActivity extends AppCompatActivity {
     public void initializeStats(){//loads text file data into Storage objects
         //TEMPLATE FOR ADDING DUMMY DATA TO A TEXT FILE
 //        try {
-//            FileOutputStream fos = openFileOutput(FILE3, Context.MODE_PRIVATE);
+//            FileOutputStream fos = openFileOutput(FILEX, Context.MODE_PRIVATE);
 //            fos.write("0,2,3,3,4,5,6,10,22,6,\n1,3,5,4,3,3,3,8,7,8,\n2,2,3,6,5,4,3,4,8,9,\n3,6,5,4,3,8,7,6,5,15,\n4,1,14,3,2,7,9,6,5,4,\n5,3,2,5,6,8,9,6,5,12,\n6,3,17,3,4,2,1,5,6,8,\n7,1,1,2,3,6,4,5,7,13,\n8,4,3,5,7,6,5,5,5,3,\n9,1,2,1,3,6,4,3,6,5,\n10,2,6,4,4,6,8,1,2,10,\n11,7,6,4,3,6,5,7,8,2,".getBytes());
 //            fos.close();
 //        } catch (Exception e){
@@ -447,15 +451,15 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void loadGraph(){
-        Button loadGraphbtn = findViewById(R.id.testBtn);
-        loadGraphbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                loadFile();
-            }
-        });
-    }
+//    public void loadGraph(){
+//        Button loadGraphbtn = findViewById(R.id.testBtn);
+//        loadGraphbtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                loadFile();
+//            }
+//        });
+//    }
 
     public void launchGame(){//launches new activity with startActivityResult which is used to pass data back to MainActivity once the launched activity is finished
         Intent i = new Intent(this, NewGameActivity.class);
@@ -659,6 +663,39 @@ public class MainActivity extends AppCompatActivity {
                 }catch (Exception e){
                     System.out.println("file load failed");;
                 }
+    }
+
+    public void displayFiles(){
+        final Button dispFiles = findViewById(R.id.dispFiles);
+        dispFiles.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (filesDisplayed){
+                    EditText dispFiles = findViewById(R.id.dispStats);
+                    dispFiles.setVisibility(View.INVISIBLE);
+
+                    GraphView graph = (GraphView) findViewById(R.id.graph2);
+                    graph.setVisibility(View.VISIBLE);
+
+                    filesDisplayed = false;
+
+                    Button filesAndGraphs = findViewById(R.id.dispFiles);
+                    filesAndGraphs.setText("FILES");
+                }
+                else {
+                    EditText dispFiles = findViewById(R.id.dispStats);
+                    dispFiles.setVisibility(View.VISIBLE);
+
+                    GraphView graph = (GraphView) findViewById(R.id.graph2);
+                    graph.setVisibility(View.INVISIBLE);
+
+                    filesDisplayed = true;
+
+                    Button filesAndGraphs = findViewById(R.id.dispFiles);
+                    filesAndGraphs.setText("GRAPH");
+                }
+            }
+        });
     }
 
 }
