@@ -2,6 +2,7 @@ package com.example.rc211.volleyballstattracker;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.LegendRenderer;
+import com.jjoe64.graphview.ValueDependentColor;
+import com.jjoe64.graphview.series.BarGraphSeries;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
@@ -56,31 +60,244 @@ public class MainActivity extends AppCompatActivity {
         initializeStats();
 
         startNewGame();
+
+        loadHitsGraph();
+
+        loadBlocksGraph();
+
+
 //        loadGraph();
 
 //        GraphView graph = (GraphView) findViewById(R.id.graph);
-//        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
-//                new DataPoint(0, 3),
-//                new DataPoint(1, 5),
-//                new DataPoint(2, 3),
-//                new DataPoint(3, 2),
-//                new DataPoint(4, 6)
-//        });
-//
-//        LineGraphSeries<DataPoint> stuff = new LineGraphSeries<>();
-//        series.appendData(new DataPoint(5,2), false,1 );
-//
-//        graph.addSeries(series);
+////        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(new DataPoint[] {
+////                new DataPoint(0, 3),
+////                new DataPoint(1, 5),
+////                new DataPoint(2, 3),
+////                new DataPoint(3, 2),
+////                new DataPoint(4, 6)
+////        });
+////
+////        LineGraphSeries<DataPoint> stuff = new LineGraphSeries<>();
+////        series.appendData(new DataPoint(5,2), false,1 );
+////
+////        graph.addSeries(series);
 
 
 
     }
 
+    public void loadBlocksGraph(){
+        String hits0 = stats.get(0).getStats(1);
+
+        String [] arr0 = hits0.split(",");
+        int total0 =0;
+        for (String x : arr0){
+            total0 += Integer.parseInt(x);
+        }
+
+
+
+        String hits1 = stats.get(1).getStats(1);
+
+        String [] arr1 = hits1.split(",");
+        int total1 =0;
+        for (String x : arr1){
+            total1 += Integer.parseInt(x);
+        }
+
+
+
+        String hits2 = stats.get(2).getStats(1);
+
+        String [] arr2 = hits2.split(",");
+        int total2 =0;
+        for (String x : arr2){
+            total2 += Integer.parseInt(x);
+        }
+
+
+
+
+        String hits3 = stats.get(3).getStats(1);
+
+        String [] arr3 = hits3.split(",");
+        int total3 =0;
+        for (String x : arr3){
+            total3 += Integer.parseInt(x);
+        }
+
+
+
+
+        String hits4 = stats.get(4).getStats(1);
+
+        String [] arr4 = hits4.split(",");
+        int total4 =0;
+        for (String x : arr4){
+            total4 += Integer.parseInt(x);
+        }
+
+
+
+
+        String hits5 = stats.get(5).getStats(1);
+
+        String [] arr5 = hits5.split(",");
+        int total5 =0;
+        for (String x : arr5){
+            total5 += Integer.parseInt(x);
+        }
+
+
+
+
+        GraphView graph = (GraphView) findViewById(R.id.graph2);
+        BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[]{});
+        series.appendData(new DataPoint(0,0),false,100);
+        series.appendData(new DataPoint(1,total0/arr0.length),false,100);
+        series.appendData(new DataPoint(2,total1/arr1.length),false,100);
+        series.appendData(new DataPoint(3,total2/arr2.length),false,100);
+        series.appendData(new DataPoint(4,total3/arr3.length),false,100);
+        series.appendData(new DataPoint(5,total4/arr4.length),false,100);
+        series.appendData(new DataPoint(6,total5/arr5.length),false,100);
+
+//        graph.getViewport().setMinX(0);
+//        graph.getViewport().setMinY(0);
+
+        graph.addSeries(series);
+        series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
+            @Override
+            public int get(DataPoint data) {
+                return Color.rgb((int) data.getX()*255/6, (int) Math.abs(data.getY()*255/6), 100);
+            }
+        });
+
+        series.setSpacing(50);
+
+        series.setDrawValuesOnTop(true);
+        series.setValuesOnTopColor(Color.RED);
+        series.setTitle("Avg Blocks per Player");
+        graph.getLegendRenderer().setVisible(true);
+        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
+
+
+
+    }
+
+    public void loadHitsGraph(){
+
+        ArrayList<Integer> hitStats = new ArrayList<>();
+        String hits0 = stats.get(0).getStats(0);
+
+        String [] arr0 = hits0.split(",");
+        int total0 =0;
+        for (String x : arr0){
+            total0 += Integer.parseInt(x);
+        }
+        hitStats.add(total0);
+
+
+
+        String hits1 = stats.get(1).getStats(0);
+
+        String [] arr1 = hits1.split(",");
+        int total1 =0;
+        for (String x : arr1){
+            total1 += Integer.parseInt(x);
+        }
+        hitStats.add(total1);
+
+
+
+        String hits2 = stats.get(2).getStats(0);
+
+        String [] arr2 = hits2.split(",");
+        int total2 =0;
+        for (String x : arr2){
+            total2 += Integer.parseInt(x);
+        }
+        hitStats.add(total2);
+
+
+
+        String hits3 = stats.get(3).getStats(0);
+
+        String [] arr3 = hits3.split(",");
+        int total3 =0;
+        for (String x : arr3){
+            total3 += Integer.parseInt(x);
+        }
+        hitStats.add(total3);
+
+
+
+        String hits4 = stats.get(4).getStats(0);
+
+        String [] arr4 = hits4.split(",");
+        int total4 =0;
+        for (String x : arr4){
+            total4 += Integer.parseInt(x);
+        }
+        hitStats.add(total4);
+
+
+
+        String hits5 = stats.get(5).getStats(0);
+
+        String [] arr5 = hits5.split(",");
+        int total5 =0;
+        for (String x : arr5){
+            total5 += Integer.parseInt(x);
+        }
+        hitStats.add(total5);
+
+//        DataPoint[] dataPoints = new DataPoint[6];
+//        dataPoints[0] = new DataPoint(0,total0/arr0.length);
+//        dataPoints[1] = new DataPoint(1,total1/arr1.length);
+//        dataPoints[2] = new DataPoint(2,total2/arr2.length);
+//        dataPoints[3] = new DataPoint(3,total3/arr3.length);
+//        dataPoints[4] = new DataPoint(4,total4/arr4.length);
+//        dataPoints[5] = new DataPoint(5,total5/arr5.length);
+
+        GraphView graph = (GraphView) findViewById(R.id.graph);
+        BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[]{});
+//        System.out.println("5" + total5);
+//        System.out.println(arr0.length);
+        series.appendData(new DataPoint(0,0),false,100);
+        series.appendData(new DataPoint(1,total0/arr0.length),false,100);
+        series.appendData(new DataPoint(2,total1/arr1.length),false,100);
+        series.appendData(new DataPoint(3,total2/arr2.length),false,100);
+        series.appendData(new DataPoint(4,total3/arr3.length),false,100);
+        series.appendData(new DataPoint(5,total4/arr4.length),false,100);
+        series.appendData(new DataPoint(6,total5/arr5.length),false,100);
+
+//        graph.getViewport().setMinX(0);
+//        graph.getViewport().setMinY(0);
+
+        graph.addSeries(series);
+        series.setValueDependentColor(new ValueDependentColor<DataPoint>() {
+            @Override
+            public int get(DataPoint data) {
+                return Color.rgb((int) data.getX()*255/6, (int) Math.abs(data.getY()*255/6), 100);
+            }
+        });
+
+        series.setSpacing(50);
+
+        series.setDrawValuesOnTop(true);
+        series.setValuesOnTopColor(Color.RED);
+        series.setTitle("Avg Hits per Player");
+        graph.getLegendRenderer().setVisible(true);
+        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
+
+
+
+    }
 
     public void initializeStats(){//loads text file data into Storage objects
         //TEMPLATE FOR ADDING DUMMY DATA TO A TEXT FILE
 //        try {
-//            FileOutputStream fos = openFileOutput(FILEX, Context.MODE_PRIVATE);
+//            FileOutputStream fos = openFileOutput(FILE3, Context.MODE_PRIVATE);
 //            fos.write("0,2,3,3,4,5,6,10,22,6,\n1,3,5,4,3,3,3,8,7,8,\n2,2,3,6,5,4,3,4,8,9,\n3,6,5,4,3,8,7,6,5,15,\n4,1,14,3,2,7,9,6,5,4,\n5,3,2,5,6,8,9,6,5,12,\n6,3,17,3,4,2,1,5,6,8,\n7,1,1,2,3,6,4,5,7,13,\n8,4,3,5,7,6,5,5,5,3,\n9,1,2,1,3,6,4,3,6,5,\n10,2,6,4,4,6,8,1,2,10,\n11,7,6,4,3,6,5,7,8,2,".getBytes());
 //            fos.close();
 //        } catch (Exception e){
@@ -421,9 +638,9 @@ public class MainActivity extends AppCompatActivity {
 
                     String line;
 
-                    GraphView graph = (GraphView) findViewById(R.id.graph);
+                    //GraphView graph = (GraphView) findViewById(R.id.graph);
                     DataPoint[] x = new DataPoint[3];
-                    LineGraphSeries<DataPoint> points = new LineGraphSeries<>(x);
+                    //LineGraphSeries<DataPoint> points = new LineGraphSeries<>(x);
 
 
                     int counter =1;
@@ -434,7 +651,7 @@ public class MainActivity extends AppCompatActivity {
                             counter++;
                         }
                         else {
-                            graph.addSeries(points);
+                            //graph.addSeries(points);
                         }
                     }
 
