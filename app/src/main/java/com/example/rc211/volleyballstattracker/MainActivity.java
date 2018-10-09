@@ -156,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         GraphView graph = (GraphView) findViewById(R.id.graph2);
+        graph.removeAllSeries();
         BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[]{});
         series.appendData(new DataPoint(0,0),false,100);
         series.appendData(new DataPoint(1,total0/arr0.length),false,100);
@@ -189,7 +190,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void loadHitsGraph(){
-
         ArrayList<Integer> hitStats = new ArrayList<>();
         String hits0 = stats.get(0).getStats(0);
 
@@ -264,6 +264,7 @@ public class MainActivity extends AppCompatActivity {
 //        dataPoints[5] = new DataPoint(5,total5/arr5.length);
 
         GraphView graph = (GraphView) findViewById(R.id.graph);
+        graph.removeAllSeries();
         BarGraphSeries<DataPoint> series = new BarGraphSeries<>(new DataPoint[]{});
 //        System.out.println("5" + total5);
 //        System.out.println(arr0.length);
@@ -477,6 +478,8 @@ public class MainActivity extends AppCompatActivity {
                 String newStats6 = data.getStringExtra("stats6");
                 saveFiles(newStats1, newStats2, newStats3, newStats4, newStats5, newStats6);
                 initializeStats();//after the data from NewGameActivity is saved to text files, it is then loaded again and added to Storage objects
+                loadHitsGraph();
+                loadBlocksGraph();
             }
         }
     }
@@ -629,41 +632,41 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void loadFile(){
-                TextView textError = findViewById(R.id.dispHit);
-                try {
-                    String dataPoints ="";
-
-
-
-                    FileInputStream fis = openFileInput(FILE1);
-
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(new DataInputStream(fis)));
-
-                    String line;
-
-                    //GraphView graph = (GraphView) findViewById(R.id.graph);
-                    DataPoint[] x = new DataPoint[3];
-                    //LineGraphSeries<DataPoint> points = new LineGraphSeries<>(x);
-
-
-                    int counter =1;
-                    while ((line = reader.readLine()) != null){
-                        if (!line.equals(" ")){
-                            x[counter-1] = new DataPoint(counter,Integer.parseInt(line));
-                            //points.appendData(new DataPoint(counter,Integer.parseInt(line)),true,1);
-                            counter++;
-                        }
-                        else {
-                            //graph.addSeries(points);
-                        }
-                    }
-
-                    fis.close();
-                }catch (Exception e){
-                    System.out.println("file load failed");;
-                }
-    }
+//    public void loadFile(){
+//                TextView textError = findViewById(R.id.dispHit);
+//                try {
+//                    String dataPoints ="";
+//
+//
+//
+//                    FileInputStream fis = openFileInput(FILE1);
+//
+//                    BufferedReader reader = new BufferedReader(new InputStreamReader(new DataInputStream(fis)));
+//
+//                    String line;
+//
+//                    //GraphView graph = (GraphView) findViewById(R.id.graph);
+//                    DataPoint[] x = new DataPoint[3];
+//                    //LineGraphSeries<DataPoint> points = new LineGraphSeries<>(x);
+//
+//
+//                    int counter =1;
+//                    while ((line = reader.readLine()) != null){
+//                        if (!line.equals(" ")){
+//                            x[counter-1] = new DataPoint(counter,Integer.parseInt(line));
+//                            //points.appendData(new DataPoint(counter,Integer.parseInt(line)),true,1);
+//                            counter++;
+//                        }
+//                        else {
+//                            //graph.addSeries(points);
+//                        }
+//                    }
+//
+//                    fis.close();
+//                }catch (Exception e){
+//                    System.out.println("file load failed");;
+//                }
+//    }
 
     public void displayFiles(){
         final Button dispFiles = findViewById(R.id.dispFiles);
